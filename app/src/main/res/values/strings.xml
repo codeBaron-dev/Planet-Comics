@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Planet Comics</string>
-    <string name="planet_comics">Planet Comics...</string>
+    <string name="planet_comics">Planet Comics…</string>
     <string name="logo">logo</string>
+    <string name="title_activity_comics_home">ComicsHomeActivity</string>
+    <string name="title_home">Comics</string>
+    <string name="title_dashboard">Favourites</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="comic_image">comic_image</string>
+    <string name="favourite_icon">favourite_icon</string>
 </resources>

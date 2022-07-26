@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.codebaron.planetcomics.models.ComicDTO" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        tools:context=".home.ui.home.HomeFragment">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/comic_image"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:src="@drawable/ic_undraw_handcrafts_planet"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
+
+        <TextView
+            android:id="@+id/comic_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/edu_nswact_foundation_bold"
+            android:hint="dcsdcndcnsidbcdbcdhjchjbcjsbj"
+            android:maxLines="3"
+            android:text="@{viewModel.title}"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comic_image" />
+
+        <TextView
+            android:id="@+id/comic_publish_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/edu_nswact_foundation_medium"
+            android:hint="samdioecidsjncidncincsdncnsdicnsddcsjjdc"
+            android:textSize="20sp"
+            android:maxLines="1"
+            android:text="@{viewModel.year}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comic_title" />
+
+        <ImageView
+            android:id="@+id/liked_song"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="15dp"
+            android:contentDescription="@string/favourite_icon"
+            android:src="@drawable/ic_baseline_favorite_24"
+            app:layout_constraintBottom_toBottomOf="@+id/comic_image"
+            app:layout_constraintEnd_toEndOf="@+id/comic_image"
+            app:layout_constraintTop_toBottomOf="@+id/comic_image" />
+
+        <Button
+            android:id="@+id/previous_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Previous"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comic_publish_date" />
+
+        <Button
+            android:id="@+id/next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comic_publish_date" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -2,4 +2,6 @@
 <resources>
     <string name="planet_comics">Planet Comics...</string>
     <string name="logo">logo</string>
+    <string name="comic_image">comic_image</string>
+    <string name="favourite_icon">favourite_icon</string>
 </resources>
