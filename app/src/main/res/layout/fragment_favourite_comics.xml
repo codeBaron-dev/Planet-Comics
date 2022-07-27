@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="800dp"
-    tools:context=".home.ui.dashboard.DashboardFragment">
+    tools:context=".home.ui.favourites.FavouriteComicsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comic_recycler_view"

@@ -1,4 +1,4 @@
-package com.codebaron.planetcomics.home.ui.dashboard
+package com.codebaron.planetcomics.home.ui.favourites
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codebaron.planetcomics.R
 import com.codebaron.planetcomics.Utils.DIALOG_MESSAGE
-import com.codebaron.planetcomics.databinding.FragmentDashboardBinding
-import com.codebaron.planetcomics.home.ui.dashboard.adapter.LocalComics
+import com.codebaron.planetcomics.databinding.FragmentFavouriteComicsBinding
+import com.codebaron.planetcomics.home.ui.favourites.adapter.LocalComics
 import com.codebaron.planetcomics.models.ComicDTO
 import com.codebaron.planetcomics.models.dummyComicDTOList
 import dmax.dialog.SpotsDialog
@@ -19,9 +19,9 @@ import dmax.dialog.SpotsDialog
  * @author Anyanwu Nicholas
  * @since July 27 - 2022
  */
-class DashboardFragment : Fragment() {
+class FavouriteComicsFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentFavouriteComicsBinding? = null
     private val binding get() = _binding!!
     private val dashboardViewModel: DashboardViewModel by viewModels()
     private lateinit var dialog: SpotsDialog
@@ -32,7 +32,7 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentFavouriteComicsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         /**

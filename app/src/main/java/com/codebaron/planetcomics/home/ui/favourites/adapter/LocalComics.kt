@@ -1,4 +1,4 @@
-package com.codebaron.planetcomics.home.ui.dashboard.adapter
+package com.codebaron.planetcomics.home.ui.favourites.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
