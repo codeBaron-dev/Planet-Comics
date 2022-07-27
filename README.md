@@ -1,4 +1,4 @@
-# Planet-Comics - Displaying entertaining comics😁
+# Planet-Comics - Displaying entertaining comics😁 ---- Checkout master branch to view source code.🫡
 
 #Functionalities :-
 
