@@ -27,27 +27,32 @@ fun isNetworkAvailable(context: Context): Boolean {
 }
 
 /**
- *This function [errorToast] display a message to the UI with custom emoji
- * which takes in
  * @param context
  * @param msg
  * @param lent
+ * @Note this function handles displaying warning toast messages to the user
  */
 fun errorToast(context: Context, msg: String, lent: Int) {
     Toast.makeText(context, "$msg \uD83D\uDE12", lent).show()
 }
 
 /**
- *This function [successToast] display a message to the UI with custom emoji
- * which takes in
- * @param [Context]
- * @param [String]
- * @param [Toast.LENGTH_LONG]
+ * @param context
+ * @param msg
+ * @param lent
+ * @Note this function handles displaying success toast messages to the user
  */
 fun successToast(context: FragmentActivity?, msg: String, lent: Int) {
     Toast.makeText(context, "$msg \uD83D\uDE00", lent).show()
 }
 
+/**
+ * @param context
+ * @param messageType
+ * @param fmt
+ * @param data
+ * @Note this function handles displaying any required message in a dialog to the user
+ */
 fun showMessageDialog(
     context: FragmentActivity?,
     messageType: String,

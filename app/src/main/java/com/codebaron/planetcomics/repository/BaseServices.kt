@@ -11,6 +11,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+/**
+ * @author Anyanwu Nicholas(codeBaron)
+ * @since July 25 - 2022
+ */
 class BaseServices {
 
     companion object{

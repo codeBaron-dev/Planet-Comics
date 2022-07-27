@@ -6,6 +6,10 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.codebaron.planetcomics.models.ComicDTO
 
+/**
+ * @author Anyanwu Nicholas(codeBaron)
+ * @since July 25 - 2022
+ */
 @Dao
 interface ComicsDao {
 

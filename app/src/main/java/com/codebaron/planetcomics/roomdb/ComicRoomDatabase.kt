@@ -6,6 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.codebaron.planetcomics.models.ComicDTO
 
+/**
+ * @author Anyanwu Nicholas(codeBaron)
+ * @since July 25 - 2022
+ */
 @Database(entities = [ComicDTO::class], version = 1)
 abstract class ComicRoomDatabase : RoomDatabase() {
     abstract fun ComicDao(): ComicsDao

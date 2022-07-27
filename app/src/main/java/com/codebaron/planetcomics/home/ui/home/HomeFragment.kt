@@ -14,6 +14,11 @@ import com.codebaron.planetcomics.repository.ResponseStateHandler
 import com.squareup.picasso.Picasso
 import dmax.dialog.SpotsDialog
 
+/**
+ * @author Anyanwu Nicholas(codeBaron)
+ * @since July 25 - 2022
+ */
+
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
@@ -28,6 +33,11 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        /**
+         * checks for internet connection and performs the required action based on the result
+         * of the condition
+         */
         activity?.let {
             dialog = SpotsDialog(it, "Loading latest comic", R.style.Custom)
             if (isNetworkAvailable(it)) {
@@ -42,6 +52,11 @@ class HomeFragment : Fragment() {
         return root
     }
 
+    /**
+     * this function is been triggered when the next and previous button is clicked,
+     * it has a default value for comicID which will either increment of decrement
+     * based on the button user clicks
+     */
     private fun clickEvents() {
         var id = 1
         _binding?.nextBtn?.setOnClickListener {
@@ -51,6 +66,10 @@ class HomeFragment : Fragment() {
             if (id == 1) getLatestComic(id) else getLatestComic(id--) }
     }
 
+    /**
+     * this function handles manages api request response, which receives it data from the [homeViewModel]
+     * and updates the UI
+     */
     private fun getLatestComic(comicId: Int) {
         homeViewModel.homeComics(comicId.toString())?.observe(viewLifecycleOwner) {
             it?.let {

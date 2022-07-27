@@ -4,6 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * @author Anyanwu Nicholas(codeBaron)
+ * @since July 25 - 2022
+ */
+
 @Entity(tableName = "comics_table")
 data class ComicDTO(
     @ColumnInfo(name = "alt") var alt: String,

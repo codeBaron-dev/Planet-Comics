@@ -9,6 +9,11 @@ import com.codebaron.planetcomics.R
 import com.codebaron.planetcomics.databinding.ActivityComicsHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+/**
+ * @author Anyanwu Nicholas(codeBaron)
+ * @since July 25 - 2022
+ */
+
 class ComicsHomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityComicsHomeBinding

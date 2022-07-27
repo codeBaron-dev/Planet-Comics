@@ -9,6 +9,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * @author Anyanwu Nicholas(codeBaron)
+ * @since July 25 - 2022
+ */
+
 class HomeRepository {
 
     companion object {
@@ -16,11 +21,18 @@ class HomeRepository {
         var errorMapper: ErrorMapper = ErrorMapper()
     }
 
+    /**
+     * @return [HomeRepository]
+     */
     fun homeRepositoryInstance(): HomeRepository {
         homeRepository = HomeRepository()
         return homeRepository
     }
 
+    /**
+     * @param comicsId
+     * @return MutableLiveData<ResponseStateHandler<[ComicDTO]?>>
+     */
     fun homeComics(comicsId: String): MutableLiveData<ResponseStateHandler<ComicDTO?>> {
         val responseState: MutableLiveData<ResponseStateHandler<ComicDTO?>> = MutableLiveData()
         responseState.postValue(ResponseStateHandler.Loading)
