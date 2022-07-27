@@ -1,5 +1,6 @@
 package com.codebaron.planetcomics.home.ui.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.codebaron.planetcomics.models.ComicDTO
@@ -14,6 +15,8 @@ class HomeViewModel : ViewModel() {
     companion object {
         var homeRepository: HomeRepository? = null
         var comicDTO: MutableLiveData<ResponseStateHandler<ComicDTO?>>? = null
+        private val _comicId = MutableLiveData<String>().apply { value = "1" }
+        private val comicObj: MutableLiveData<ComicDTO>? = null
     }
 
     /**
@@ -25,4 +28,7 @@ class HomeViewModel : ViewModel() {
         comicDTO = homeRepository?.homeComics(comicId)
         return comicDTO
     }
+
+    val comicId: LiveData<String> = _comicId
+    val comicObject: MutableLiveData<ComicDTO>? = comicObj
 }

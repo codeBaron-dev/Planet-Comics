@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.codebaron.planetcomics.Utils.DATABASE_NAME
 import com.codebaron.planetcomics.models.ComicDTO
 
 /**
@@ -24,7 +25,7 @@ abstract class ComicRoomDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context, ComicRoomDatabase::class.java, "comic_db")
+            Room.databaseBuilder(context, ComicRoomDatabase::class.java, DATABASE_NAME)
                 .allowMainThreadQueries()
                 .build()
     }

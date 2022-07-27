@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.codebaron.planetcomics.R
-import com.codebaron.planetcomics.Utils.isNetworkAvailable
-import com.codebaron.planetcomics.Utils.showMessageDialog
+import com.codebaron.planetcomics.Utils.*
 import com.codebaron.planetcomics.databinding.FragmentHomeBinding
 import com.codebaron.planetcomics.repository.ResponseStateHandler
+import com.codebaron.planetcomics.roomdb.ComicRoomDatabase
 import com.squareup.picasso.Picasso
 import dmax.dialog.SpotsDialog
 
@@ -25,6 +26,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var dialog: SpotsDialog
+    private var comicRoomDatabase: ComicRoomDatabase? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,14 +41,11 @@ class HomeFragment : Fragment() {
          * of the condition
          */
         activity?.let {
-            dialog = SpotsDialog(it, "Loading latest comic", R.style.Custom)
+            dialog = SpotsDialog(it, DIALOG_MESSAGE, R.style.Custom)
+            comicRoomDatabase = ComicRoomDatabase(it)
             if (isNetworkAvailable(it)) {
                 getLatestComic(1)
-            } else showMessageDialog(
-                it,
-                "Internet Connection Error",
-                "Please ensure you have a stable internet connection"
-            )
+            } else showMessageDialog(it, INTERNET_ERROR_MESSAGE_TYPE, INTERNET_ERROR_MESSAGE)
         }
         clickEvents()
         return root
@@ -58,12 +57,23 @@ class HomeFragment : Fragment() {
      * based on the button user clicks
      */
     private fun clickEvents() {
-        var id = 1
-        _binding?.nextBtn?.setOnClickListener {
-            getLatestComic(id++)
+        var comicId = homeViewModel.comicId.value!!.toInt()
+        activity?.let { context ->
+            _binding?.nextBtn?.setOnClickListener {
+                getLatestComic(comicId++)
+            }
+
+            _binding?.previousBtn?.setOnClickListener {
+                if (comicId == 1) getLatestComic(comicId) else getLatestComic(comicId--)
+            }
+
+            _binding?.likedComic?.setOnClickListener {
+                homeViewModel.comicObject?.value?.let { it1 ->
+                    comicRoomDatabase?.ComicDao()?.insertComic(it1)
+                }
+                successToast(context, "Added to your favourites", Toast.LENGTH_SHORT)
+            }
         }
-        _binding?.previousBtn?.setOnClickListener {
-            if (id == 1) getLatestComic(id) else getLatestComic(id--) }
     }
 
     /**
@@ -79,18 +89,19 @@ class HomeFragment : Fragment() {
                         dialog.dismiss()
                         _binding?.viewModel = it.data
                         Picasso.get().load(it.data?.img).into(_binding?.comicImage)
+                        homeViewModel.comicObject?.postValue(it.data)
                     }
                     is ResponseStateHandler.ErrorMessage ->  {
                         dialog.dismiss()
-                        showMessageDialog(requireActivity(), "Request Failed", it.message)
+                        showMessageDialog(requireActivity(), REQUEST_FAILED, it.message)
                     }
                     is ResponseStateHandler.Exception ->  {
                         dialog.dismiss()
-                        showMessageDialog(requireActivity(), "Request Failed", it.exception.message)
+                        showMessageDialog(requireActivity(), REQUEST_FAILED, it.exception.message)
                     }
                     is ResponseStateHandler.Throwable ->  {
                         dialog.dismiss()
-                        showMessageDialog(requireActivity(), "Request Failed", it.throwable.message)
+                        showMessageDialog(requireActivity(), REQUEST_FAILED, it.throwable.message)
                     }
                 }
             }

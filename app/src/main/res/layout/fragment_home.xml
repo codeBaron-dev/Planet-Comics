@@ -51,12 +51,12 @@
             app:layout_constraintTop_toBottomOf="@+id/comic_title" />
 
         <ImageView
-            android:id="@+id/liked_song"
+            android:id="@+id/liked_comic"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_marginEnd="15dp"
             android:contentDescription="@string/favourite_icon"
-            android:src="@drawable/ic_baseline_favorite_24"
+            android:src="@drawable/ic_outline_favorite_border_24"
             app:layout_constraintBottom_toBottomOf="@+id/comic_image"
             app:layout_constraintEnd_toEndOf="@+id/comic_image"
             app:layout_constraintTop_toBottomOf="@+id/comic_image" />
@@ -65,7 +65,7 @@
             android:id="@+id/previous_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Previous"
+            android:text="@string/previous"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/comic_publish_date" />
@@ -74,7 +74,7 @@
             android:id="@+id/next_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Next"
+            android:text="@string/next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/comic_publish_date" />

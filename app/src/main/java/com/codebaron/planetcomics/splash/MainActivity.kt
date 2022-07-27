@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.codebaron.planetcomics.R
+import com.codebaron.planetcomics.Utils.INTERNET_ERROR_MESSAGE
+import com.codebaron.planetcomics.Utils.INTERNET_ERROR_MESSAGE_TYPE
 import com.codebaron.planetcomics.Utils.isNetworkAvailable
 import com.codebaron.planetcomics.Utils.showMessageDialog
 import com.codebaron.planetcomics.home.ComicsHomeActivity
@@ -31,8 +33,7 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this@MainActivity, ComicsHomeActivity::class.java))
                 }
             } else {
-                showMessageDialog(it, "Internet Connection Error",
-                    "Please ensure you have a stable internet connection")
+                showMessageDialog(it, INTERNET_ERROR_MESSAGE_TYPE, INTERNET_ERROR_MESSAGE)
             }
         }
     }
