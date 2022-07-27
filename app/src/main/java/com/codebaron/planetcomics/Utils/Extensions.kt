@@ -87,7 +87,7 @@ fun openBottomSheet(data: ComicDTO?, context: Context) {
     layout.findViewById<TextView>(R.id.comic_title).text = data?.title
     layout.findViewById<TextView>(R.id.comic_description).text = data?.alt
     layout.findViewById<TextView>(R.id.comic_publish_date).text =
-        "Released date: ${data?.day}-${data?.month}-${data?.year}"
+        "$RELEASE_DATE: ${data?.day}-${data?.month}-${data?.year}"
     layout.findViewById<Button>(R.id.dismiss_btn)
         .setOnClickListener { bottomSheet.dismiss() }
     bottomSheet.setContentView(layout)

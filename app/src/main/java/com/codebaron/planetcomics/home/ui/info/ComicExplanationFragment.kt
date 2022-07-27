@@ -5,8 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.codebaron.planetcomics.Utils.COMIC_EXPLANATION_URL
+import androidx.lifecycle.lifecycleScope
+import com.codebaron.planetcomics.R
+import com.codebaron.planetcomics.Utils.*
 import com.codebaron.planetcomics.databinding.FragmentComicExplanationBinding
+import dmax.dialog.SpotsDialog
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * @author Anyanwu Nicholas
@@ -16,6 +21,7 @@ class ComicExplanationFragment : Fragment() {
 
     private var _binding: FragmentComicExplanationBinding? = null
     private val binding get() = _binding!!
+    private lateinit var dialog: SpotsDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +29,16 @@ class ComicExplanationFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentComicExplanationBinding.inflate(layoutInflater, container, false)
+        activity?.let {
+            dialog = SpotsDialog(it, LOADING_WEB_CONTENT, R.style.Custom)
+            if (isNetworkAvailable(it)) {
+                dialog.show()
+                lifecycleScope.launch {
+                    delay(4000)
+                    dialog.dismiss()
+                }
+            } else showMessageDialog(it, INTERNET_ERROR_MESSAGE_TYPE, INTERNET_ERROR_MESSAGE)
+        }
         val root = binding.root
         loadWebView()
         return root

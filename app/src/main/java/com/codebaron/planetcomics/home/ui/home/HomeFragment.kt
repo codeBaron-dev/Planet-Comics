@@ -120,7 +120,7 @@ class HomeFragment : Fragment() {
     private fun insertToLocalDatabase(data: ComicDTO?) {
         _binding?.likedComic?.setOnClickListener {
             data?.let { it1 -> comicRoomDatabase?.ComicDao()?.insertComic(it1) }
-            successToast(requireActivity(), "Added to your favourites", Toast.LENGTH_SHORT)
+            successToast(requireActivity(), ADDED_TO_FAVOURITES, Toast.LENGTH_SHORT)
         }
 
         _binding?.comicImage?.setOnClickListener {
