@@ -3,8 +3,16 @@ package com.codebaron.planetcomics.Utils
 import android.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
+import android.view.LayoutInflater
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
+import com.codebaron.planetcomics.R
+import com.codebaron.planetcomics.models.ComicDTO
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.squareup.picasso.Picasso
 
 /**
  * @author Anyanwu Nicholas(codeBaron)
@@ -65,4 +73,23 @@ fun showMessageDialog(
     alertDialog.setMessage(msg)
     alertDialog.setCancelable(true)
     alertDialog.show()
+}
+
+/**
+ * this function handles displaying the comic details in a bottomSheet
+ * @param data
+ */
+fun openBottomSheet(data: ComicDTO?, context: Context) {
+    val bottomSheet = BottomSheetDialog(context)
+    val layout = LayoutInflater.from(context).inflate(R.layout.comics_bottom_sheet, null)
+
+    Picasso.get().load(data?.img).into(layout.findViewById<ImageView>(R.id.comic_image))
+    layout.findViewById<TextView>(R.id.comic_title).text = data?.title
+    layout.findViewById<TextView>(R.id.comic_description).text = data?.alt
+    layout.findViewById<TextView>(R.id.comic_publish_date).text =
+        "Released date: ${data?.day}-${data?.month}-${data?.year}"
+    layout.findViewById<Button>(R.id.dismiss_btn)
+        .setOnClickListener { bottomSheet.dismiss() }
+    bottomSheet.setContentView(layout)
+    bottomSheet.show()
 }

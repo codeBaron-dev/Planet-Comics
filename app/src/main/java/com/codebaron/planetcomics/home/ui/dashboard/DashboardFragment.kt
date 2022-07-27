@@ -52,7 +52,7 @@ class DashboardFragment : Fragment() {
      */
     private fun loadLocalComics() {
         activity?.let {
-            val localComicsAdapter = LocalComics(comicList, R.layout.local_comics)
+            val localComicsAdapter = LocalComics(comicList, R.layout.local_comics, it)
             _binding?.comicRecyclerView?.adapter = localComicsAdapter
             _binding?.comicRecyclerView?.layoutManager = LinearLayoutManager(it)
 
@@ -61,9 +61,9 @@ class DashboardFragment : Fragment() {
              * check if database [isEmpty] and perform the required action based on the
              * result of the condition
              */
-            val comics = if (dashboardViewModel.loadLocalComics(it).isEmpty()) {
+            val comics = dashboardViewModel.loadLocalComics(it).ifEmpty {
                 dummyComicDTOList /*Dummy Data*/
-            } else dashboardViewModel.loadLocalComics(it)
+            }
             comicList.addAll(comics)
             localComicsAdapter.notifyDataSetChanged()
         }

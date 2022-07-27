@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -17,7 +14,6 @@ import com.codebaron.planetcomics.databinding.FragmentHomeBinding
 import com.codebaron.planetcomics.models.ComicDTO
 import com.codebaron.planetcomics.repository.ResponseStateHandler
 import com.codebaron.planetcomics.roomdb.ComicRoomDatabase
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import dmax.dialog.SpotsDialog
 
@@ -85,27 +81,6 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * this function handles displaying the comic details in a bottomSheet
-     * @param data
-     */
-    private fun openBottomSheet(data: ComicDTO?) {
-        activity?.let {
-            val bottomSheet = BottomSheetDialog(it)
-            val layout = layoutInflater.inflate(R.layout.comics_bottom_sheet, null)
-
-            Picasso.get().load(data?.img).into(layout.findViewById<ImageView>(R.id.comic_image))
-            layout.findViewById<TextView>(R.id.comic_title).text = data?.title
-            layout.findViewById<TextView>(R.id.comic_description).text = data?.alt
-            layout.findViewById<TextView>(R.id.comic_publish_date).text =
-                "Released date: ${data?.day}-${data?.month}-${data?.year}"
-            layout.findViewById<Button>(R.id.dismiss_btn)
-                .setOnClickListener { bottomSheet.dismiss() }
-            bottomSheet.setContentView(layout)
-            bottomSheet.show()
-        }
-    }
-
-    /**
      * this function handles manages api request response, which receives it data from the [homeViewModel]
      * and updates the UI
      */
@@ -149,7 +124,7 @@ class HomeFragment : Fragment() {
         }
 
         _binding?.comicImage?.setOnClickListener {
-            openBottomSheet(data)
+            openBottomSheet(data, requireActivity())
         }
     }
 
