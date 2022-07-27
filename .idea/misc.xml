@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/ic_undraw_handcrafts_planet.xml" value="0.1905" />
         <entry key="app/src/main/res/layout/activity_comics_home.xml" value="0.31203703703703706" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.359375" />
+        <entry key="app/src/main/res/layout/comics_bottom_sheet.xml" value="0.3723958333333333" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.335" />
         <entry key="app/src/main/res/layout/local_comics.xml" value="0.3723958333333333" />

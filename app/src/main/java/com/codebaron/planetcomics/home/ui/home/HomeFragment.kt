@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +16,7 @@ import com.codebaron.planetcomics.databinding.FragmentHomeBinding
 import com.codebaron.planetcomics.models.ComicDTO
 import com.codebaron.planetcomics.repository.ResponseStateHandler
 import com.codebaron.planetcomics.roomdb.ComicRoomDatabase
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import dmax.dialog.SpotsDialog
 
@@ -59,14 +63,33 @@ class HomeFragment : Fragment() {
      */
     private fun clickEvents() {
         var comicId = homeViewModel.comicId.value!!.toInt()
-        activity?.let { context ->
-            _binding?.nextBtn?.setOnClickListener {
-                getLatestComic(comicId++)
-            }
+        _binding?.nextBtn?.setOnClickListener {
+            getLatestComic(comicId++)
+        }
 
-            _binding?.previousBtn?.setOnClickListener {
-                if (comicId == 1) getLatestComic(comicId) else getLatestComic(comicId--)
-            }
+        _binding?.previousBtn?.setOnClickListener {
+            if (comicId == 1) getLatestComic(comicId) else getLatestComic(comicId--)
+        }
+    }
+
+    /**
+     * this function handles displaying the comic details in a bottomSheet
+     * @param data
+     */
+    private fun openBottomSheet(data: ComicDTO?) {
+        activity?.let {
+            val bottomSheet = BottomSheetDialog(it)
+            val layout = layoutInflater.inflate(R.layout.comics_bottom_sheet, null)
+
+            Picasso.get().load(data?.img).into(layout.findViewById<ImageView>(R.id.comic_image))
+            layout.findViewById<TextView>(R.id.comic_title).text = data?.title
+            layout.findViewById<TextView>(R.id.comic_description).text = data?.alt
+            layout.findViewById<TextView>(R.id.comic_publish_date).text =
+                "Released date: ${data?.day}-${data?.month}-${data?.year}"
+            layout.findViewById<Button>(R.id.dismiss_btn)
+                .setOnClickListener { bottomSheet.dismiss() }
+            bottomSheet.setContentView(layout)
+            bottomSheet.show()
         }
     }
 
@@ -86,15 +109,15 @@ class HomeFragment : Fragment() {
                         homeViewModel.comicObject?.postValue(it.data)
                         insertToLocalDatabase(it.data)
                     }
-                    is ResponseStateHandler.ErrorMessage ->  {
+                    is ResponseStateHandler.ErrorMessage -> {
                         dialog.dismiss()
                         showMessageDialog(requireActivity(), REQUEST_FAILED, it.message)
                     }
-                    is ResponseStateHandler.Exception ->  {
+                    is ResponseStateHandler.Exception -> {
                         dialog.dismiss()
                         showMessageDialog(requireActivity(), REQUEST_FAILED, it.exception.message)
                     }
-                    is ResponseStateHandler.Throwable ->  {
+                    is ResponseStateHandler.Throwable -> {
                         dialog.dismiss()
                         showMessageDialog(requireActivity(), REQUEST_FAILED, it.throwable.message)
                     }
@@ -111,6 +134,10 @@ class HomeFragment : Fragment() {
         _binding?.likedComic?.setOnClickListener {
             data?.let { it1 -> comicRoomDatabase?.ComicDao()?.insertComic(it1) }
             successToast(requireActivity(), "Added to your favourites", Toast.LENGTH_SHORT)
+        }
+
+        _binding?.comicImage?.setOnClickListener {
+            openBottomSheet(data)
         }
     }
 

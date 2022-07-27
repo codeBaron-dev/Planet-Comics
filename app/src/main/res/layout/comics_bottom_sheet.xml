@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.codebaron.planetcomics.models.ComicDTO" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp">
+
+            <!--image view for displaying comic image-->
+            <ImageView
+                android:id="@+id/comic_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_undraw_handcrafts_planet"
+                android:contentDescription="@string/logo" />
+
+            <!--text view for displaying comic title-->
+            <TextView
+                android:id="@+id/comic_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/comic_image"
+                android:fontFamily="@font/edu_nswact_foundation_bold"
+                android:text="@{viewModel.title}"
+                android:textSize="18sp" />
+
+            <!--text view for displaying released date-->
+            <TextView
+                android:id="@+id/comic_publish_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/comic_title"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/comic_image"
+                android:text="@{viewModel.year}"
+                android:fontFamily="@font/edu_nswact_foundation_semi_bold"
+                android:maxLines="1"
+                android:textSize="15sp" />
+
+            <!--text view for displaying description-->
+            <TextView
+                android:id="@+id/comic_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/comic_publish_date"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/comic_image"
+                android:text="@{viewModel.alt}"
+                android:fontFamily="@font/edu_nswact_foundation_regular"
+                android:textSize="15sp" />
+
+            <!--button for dismissing our dialog-->
+            <Button
+                android:id="@+id/dismiss_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/comic_image"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/edu_nswact_foundation_bold"
+                android:text="@string/dismiss"
+                android:textAllCaps="false" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

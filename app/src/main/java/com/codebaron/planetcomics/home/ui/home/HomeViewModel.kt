@@ -19,6 +19,9 @@ class HomeViewModel : ViewModel() {
         private val comicObj: MutableLiveData<ComicDTO>? = null
     }
 
+    val comicId: LiveData<String> = comicIdNumber
+    val comicObject: MutableLiveData<ComicDTO>? = comicObj
+
     /**
      * @param comicId
      * @return MutableLiveData<ResponseStateHandler<[ComicDTO]?>>?
@@ -28,7 +31,4 @@ class HomeViewModel : ViewModel() {
         comicDTO = homeRepository?.homeComics(comicId)
         return comicDTO
     }
-
-    val comicId: LiveData<String> = comicIdNumber
-    val comicObject: MutableLiveData<ComicDTO>? = comicObj
 }
