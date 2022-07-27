@@ -15,7 +15,7 @@ class HomeViewModel : ViewModel() {
     companion object {
         var homeRepository: HomeRepository? = null
         var comicDTO: MutableLiveData<ResponseStateHandler<ComicDTO?>>? = null
-        private val _comicId = MutableLiveData<String>().apply { value = "1" }
+        private val comicIdNumber = MutableLiveData<String>().apply { value = "1" }
         private val comicObj: MutableLiveData<ComicDTO>? = null
     }
 
@@ -29,6 +29,6 @@ class HomeViewModel : ViewModel() {
         return comicDTO
     }
 
-    val comicId: LiveData<String> = _comicId
+    val comicId: LiveData<String> = comicIdNumber
     val comicObject: MutableLiveData<ComicDTO>? = comicObj
 }

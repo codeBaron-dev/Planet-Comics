@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.codebaron.planetcomics.R
 import com.codebaron.planetcomics.Utils.*
 import com.codebaron.planetcomics.databinding.FragmentHomeBinding
+import com.codebaron.planetcomics.models.ComicDTO
 import com.codebaron.planetcomics.repository.ResponseStateHandler
 import com.codebaron.planetcomics.roomdb.ComicRoomDatabase
 import com.squareup.picasso.Picasso
@@ -66,13 +67,6 @@ class HomeFragment : Fragment() {
             _binding?.previousBtn?.setOnClickListener {
                 if (comicId == 1) getLatestComic(comicId) else getLatestComic(comicId--)
             }
-
-            _binding?.likedComic?.setOnClickListener {
-                homeViewModel.comicObject?.value?.let { it1 ->
-                    comicRoomDatabase?.ComicDao()?.insertComic(it1)
-                }
-                successToast(context, "Added to your favourites", Toast.LENGTH_SHORT)
-            }
         }
     }
 
@@ -90,6 +84,7 @@ class HomeFragment : Fragment() {
                         _binding?.viewModel = it.data
                         Picasso.get().load(it.data?.img).into(_binding?.comicImage)
                         homeViewModel.comicObject?.postValue(it.data)
+                        insertToLocalDatabase(it.data)
                     }
                     is ResponseStateHandler.ErrorMessage ->  {
                         dialog.dismiss()
@@ -105,6 +100,17 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * this function handles inserting comics to local database
+     * @param data
+     */
+    private fun insertToLocalDatabase(data: ComicDTO?) {
+        _binding?.likedComic?.setOnClickListener {
+            data?.let { it1 -> comicRoomDatabase?.ComicDao()?.insertComic(it1) }
+            successToast(requireActivity(), "Added to your favourites", Toast.LENGTH_SHORT)
         }
     }
 
