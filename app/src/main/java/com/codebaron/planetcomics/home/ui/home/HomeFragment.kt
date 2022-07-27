@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.codebaron.planetcomics.R
@@ -70,6 +71,17 @@ class HomeFragment : Fragment() {
         _binding?.previousBtn?.setOnClickListener {
             if (comicId == 1) getLatestComic(comicId) else getLatestComic(comicId--)
         }
+
+        _binding?.comicSearch?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.toInt()?.let { getLatestComic(it) }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
     }
 
     /**
