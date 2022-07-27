@@ -17,4 +17,10 @@
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_favourite_comics" />
 
+    <fragment
+        android:id="@+id/navigation_explanation"
+        android:name="com.codebaron.planetcomics.home.ui.info.ComicExplanationFragment"
+        android:label="@string/title_explanation"
+        tools:layout="@layout/fragment_comic_explanation" />
+
 </navigation>
