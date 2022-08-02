@@ -17,6 +17,6 @@ class DashboardViewModel : ViewModel() {
      */
     fun loadLocalComics(context: Context): List<ComicDTO> {
         val localDatabase = ComicRoomDatabase(context)
-        return localDatabase.ComicDao().getAllLocalComics()
+        return localDatabase.comicDao().getAllLocalComics()
     }
 }

@@ -13,7 +13,7 @@ import com.codebaron.planetcomics.models.ComicDTO
  */
 @Database(entities = [ComicDTO::class], version = 1)
 abstract class ComicRoomDatabase : RoomDatabase() {
-    abstract fun ComicDao(): ComicsDao
+    abstract fun comicDao(): ComicsDao
 
     companion object {
         @Volatile
